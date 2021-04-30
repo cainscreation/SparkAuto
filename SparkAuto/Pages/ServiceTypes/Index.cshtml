@@ -1,0 +1,59 @@
+﻿@page
+@model SparkAuto.Pages.ServiceTypes.IndexModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Service Type List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-info">
+                <i class="fas fa-plus"></i> Create New
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    <div class="">
+        @if (Model.ServiceType.Count == 0)
+        {
+            <p>No Service Class Exist Please Create New Service Type.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayFor((m => m.ServiceType[0].Name))
+                    </th>
+                    <th>
+                        @Html.DisplayFor((m => m.ServiceType[0].Price))
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.ServiceType)
+                {
+                    <tr>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-page="Details"> @Html.DisplayFor(m => item.Name)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-primary text-white" asp-page="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-success text-white" asp-page="Details" asp-route-id="@item.Id"><i class="fas fa-list-alt"></i></a>
+                                <a class="btn btn-danger text-white" asp-page="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
